@@ -9,7 +9,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class RegisterController {
     public GridPane pnRegister;
@@ -24,12 +23,11 @@ public class RegisterController {
     }
     @FXML
     protected void onRegisterClick() throws IOException {
-        Parent homeview = FXMLLoader.load(Objects.requireNonNull(HelloApplication.class
-                .getResource("home-view.fxml")));
+        Parent homeview = FXMLLoader.load(HelloApplication.class
+                .getResource("home-view.fxml"));
         AnchorPane p = (AnchorPane) pnRegister.getParent();
         p.getChildren().remove(pnRegister);
         p.getChildren().add(homeview);
-
 
 
     }

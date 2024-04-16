@@ -30,6 +30,5 @@ public class HelloController {
         p.getChildren().remove(pnLogin);
         p.getChildren().add(homeview);
 
-
     }
 }
