@@ -5,34 +5,62 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csit228_f1_v2.RegisterController">
-   <children>
-      <GridPane fx:id="pnLogin" alignment="CENTER" hgap="22.0" prefHeight="408.0" prefWidth="600.0" vgap="10.0">
-       <padding>
-           <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-       </padding>
-          <columnConstraints>
-              <ColumnConstraints halignment="CENTER" />
-              <ColumnConstraints />
-              <ColumnConstraints halignment="CENTER" />
-          </columnConstraints>
-          <rowConstraints>
-              <RowConstraints valignment="CENTER" />
-              <RowConstraints />
-              <RowConstraints />
-              <RowConstraints />
-              <RowConstraints />
-              <RowConstraints />
-              <RowConstraints />
-          </rowConstraints>
-          <children>
-              <Label text="Username" GridPane.rowIndex="1" />
-              <TextField minWidth="125.0" prefHeight="28.0" prefWidth="125.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-              <Label text="Password" GridPane.rowIndex="3" />
-              <TextField accessibleRole="PASSWORD_FIELD" prefHeight="28.0" prefWidth="110.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-              <Button mnemonicParsing="false" text="Register" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
-              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: RED;" text="REGISTER HERE!!!" textAlignment="CENTER" GridPane.columnSpan="3" />
-          </children>
-      </GridPane>
-   </children>
+<AnchorPane fx:id="pnRegister" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csit228_f1_v2.RegisterController">
+    <children>
+        <GridPane fx:id="pnLogin" alignment="CENTER" hgap="22.0" prefHeight="400.0" prefWidth="600.0" vgap="10.0">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" />
+                <ColumnConstraints />
+                <ColumnConstraints halignment="CENTER" />
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints valignment="CENTER" />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+            </rowConstraints>
+            <children>
+                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: BLUE;" text="REGISTRATION" textAlignment="CENTER" GridPane.columnSpan="3" GridPane.rowIndex="0">
+                    <font>
+                        <Font name="System Bold Italic" size="43.0" />
+                    </font></Text>
+                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: RED;" textAlignment="CENTER" GridPane.columnSpan="3" GridPane.rowIndex="1">
+                    <font>
+                        <Font size="20.0" />
+                    </font></Text>
+                <Label text="Enter Username:" textFill="#208fd4" GridPane.rowIndex="3">
+                    <font>
+                        <Font size="20.0" />
+                    </font></Label>
+                <TextField fx:id="tfUsername" prefHeight="30.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+                <Label text="Enter Password:" textFill="#2098d4" GridPane.rowIndex="5">
+                    <font>
+                        <Font size="20.0" />
+                    </font></Label>
+                <TextField fx:id="tfTmpPass" prefHeight="30.0" prefWidth="200.0" visible="false" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+                <PasswordField fx:id="pfUserPass" prefHeight="30.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+                <Button mnemonicParsing="false" onMouseClicked="#onShowPassword" onMouseExited="#onUnshowPassword" onMousePressed="#onShowPassword" onMouseReleased="#onUnshowPassword" prefHeight="30.0" prefWidth="30.0" text="👁" textFill="#a537a9" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                <Label fx:id="lblFeedback" GridPane.columnSpan="3" GridPane.rowIndex="6">
+                    <font>
+                        <Font size="20.0" />
+                    </font></Label>
+                <Button mnemonicParsing="false" onAction="#onRegisterClick" text="REGISTER" textFill="#b1310a" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+                    <font>
+                        <Font name="System Bold" size="20.0" />
+                    </font></Button>
+                <Button mnemonicParsing="false" onAction="#onToLogInClick" text="Back " textFill="#56dc6a" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+                    <font>
+                        <Font size="20.0" />
+                    </font></Button>
+            </children>
+        </GridPane>
+    </children>
 </AnchorPane>

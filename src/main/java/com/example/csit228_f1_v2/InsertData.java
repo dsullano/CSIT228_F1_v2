@@ -9,8 +9,8 @@ public class InsertData {
             PreparedStatement statement = c.prepareStatement(
                     "INSERT INTO tblusers (name,email) VALUES(?,?)"
             )){
-            String name = "Zhazted Valles";
-            String email ="zv@gmail.com";
+            String name = "Kim Chiu";
+            String email ="kim@gmail.com";
 
             statement.setString(1,name);
             statement.setString(2,email);
