@@ -35,7 +35,7 @@ public class CreateTable {
             try {
                 Statement statement = c.createStatement();
                 statement.execute(query);
-                System.out.println("Users table created successfully");
+                System.out.println("Users table created successfully!");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
