@@ -5,62 +5,98 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="pnRegister" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csit228_f1_v2.RegisterController">
+<AnchorPane prefHeight="900.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csit228_f1_v2.RegisterController">
     <children>
-        <GridPane fx:id="pnLogin" alignment="CENTER" hgap="22.0" prefHeight="400.0" prefWidth="600.0" vgap="10.0">
-            <padding>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-            </padding>
+        <GridPane layoutX="98.0" layoutY="223.0" prefHeight="448.0" prefWidth="547.0">
             <columnConstraints>
-                <ColumnConstraints halignment="CENTER" />
-                <ColumnConstraints />
-                <ColumnConstraints halignment="CENTER" />
-                <ColumnConstraints />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="108.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="377.0" minWidth="10.0" prefWidth="358.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints valignment="CENTER" />
-                <RowConstraints />
-                <RowConstraints />
-                <RowConstraints />
-                <RowConstraints />
-                <RowConstraints />
-                <RowConstraints />
-                <RowConstraints />
+                <RowConstraints minHeight="10.0" prefHeight="76.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: BLUE;" text="REGISTRATION" textAlignment="CENTER" GridPane.columnSpan="3" GridPane.rowIndex="0">
+
+                <Label prefHeight="46.0" prefWidth="133.0" text=" Your Name:" textFill="#960909" GridPane.rowIndex="1">
                     <font>
-                        <Font name="System Bold Italic" size="43.0" />
-                    </font></Text>
-                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: RED;" textAlignment="CENTER" GridPane.columnSpan="3" GridPane.rowIndex="1">
+                        <Font name="Cooper Black" size="17.0" />
+                    </font>
+                </Label>
+
+                <Label prefHeight="46.0" prefWidth="133.0" text="Your Email:" textFill="#960909" GridPane.rowIndex="2">
                     <font>
-                        <Font size="20.0" />
-                    </font></Text>
-                <Label text="Enter Username:" textFill="#208fd4" GridPane.rowIndex="3">
+                        <Font name="Cooper Black" size="17.0" />
+                    </font>
+                </Label>
+
+                <Label prefHeight="46.0" prefWidth="133.0" text=" Your Address:" textFill="#960909" GridPane.rowIndex="3">
                     <font>
-                        <Font size="20.0" />
-                    </font></Label>
-                <TextField fx:id="tfUsername" prefHeight="30.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-                <Label text="Enter Password:" textFill="#2098d4" GridPane.rowIndex="5">
+                        <Font name="Cooper Black" size="17.0" />
+                    </font>
+                </Label>
+
+                <Label prefHeight="46.0" prefWidth="200.0" text="Your Password:" textFill="#960909" GridPane.rowIndex="4">
                     <font>
-                        <Font size="20.0" />
-                    </font></Label>
-                <TextField fx:id="tfTmpPass" prefHeight="30.0" prefWidth="200.0" visible="false" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5" />
-                <PasswordField fx:id="pfUserPass" prefHeight="30.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5" />
-                <Button mnemonicParsing="false" onMouseClicked="#onShowPassword" onMouseExited="#onUnshowPassword" onMousePressed="#onShowPassword" onMouseReleased="#onUnshowPassword" prefHeight="30.0" prefWidth="30.0" text="👁" textFill="#a537a9" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                <Label fx:id="lblFeedback" GridPane.columnSpan="3" GridPane.rowIndex="6">
+                        <Font name="Cooper Black" size="17.0" />
+                    </font>
+                </Label>
+
+                <Label prefHeight="46.0" prefWidth="200.0" text="Your Username:" textFill="#960909" GridPane.rowIndex="5">
                     <font>
-                        <Font size="20.0" />
-                    </font></Label>
-                <Button mnemonicParsing="false" onAction="#onRegisterClick" text="REGISTER" textFill="#b1310a" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+                        <Font name="Cooper Black" size="17.0" />
+                    </font>
+                </Label>
+
+                <TextField fx:id="textFieldName" prefHeight="56.0" prefWidth="259.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="textFieldEmail" prefHeight="61.0" prefWidth="351.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="textFieldAddress" prefHeight="54.0" prefWidth="351.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <TextField fx:id="textFieldUsername" prefHeight="54.0" prefWidth="351.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <PasswordField fx:id="textFieldPassword" prefHeight="59.0" prefWidth="351.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <Label fx:id="txtForm" minHeight="10" prefHeight="44.0" prefWidth="451.0" text="FILL IN TO REGISTER:" textFill="#760505" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0">
                     <font>
-                        <Font name="System Bold" size="20.0" />
-                    </font></Button>
-                <Button mnemonicParsing="false" onAction="#onToLogInClick" text="Back " textFill="#56dc6a" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7">
-                    <font>
-                        <Font size="20.0" />
-                    </font></Button>
+                        <Font name="Cooper Black" size="38.0" />
+                    </font>
+                </Label>
+
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="6">
+                    <children>
+                        <Button onAction="#btnRegisterClick" prefHeight="58.0" prefWidth="95.0" text="REGISTER" textFill="#860909">
+                     <font>
+                        <Font name="Chiller" size="17.0" />
+                     </font></Button>
+                        <Button onAction="#btnUpdateClick" prefHeight="58.0" prefWidth="95.0" text="UPDATE" textFill="#760505">
+                     <font>
+                        <Font name="Chiller" size="17.0" />
+                     </font></Button>
+                        <Button onAction="#btnDeleteClick" prefHeight="58.0" prefWidth="95.0" text="DELETE" textFill="#760505">
+                     <font>
+                        <Font name="Chiller" size="17.0" />
+                     </font></Button>
+                        <Button onAction="#btnReadClick" prefHeight="58.0" prefWidth="95.0" text="READ" textFill="#760505">
+                     <font>
+                        <Font name="Chiller" size="17.0" />
+                     </font></Button>
+                    </children>
+
+                    <padding>
+                        <Insets bottom="10" left="10" right="10" top="10" />
+                    </padding>
+                </HBox>
+
             </children>
+            <style>
+                -fx-border-width: 2px;
+                -fx-background-color: #FFE033;
+            </style>
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
         </GridPane>
     </children>
 </AnchorPane>

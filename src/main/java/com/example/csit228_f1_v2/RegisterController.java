@@ -1,90 +1,109 @@
 package com.example.csit228_f1_v2;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import org.w3c.dom.Text;
+import java.sql.*;
+import java.util.Optional;
+import javafx.scene.control.Alert;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class RegisterController {
-    public AnchorPane pnRegister;
-    public AnchorPane pnMain;
-    public TextField tfUsername;
-    public TextField tfTmpPass;
-    public PasswordField pfUserPass;
-    public Label lblFeedback;
+    public TextField textFieldName;
+    public TextField textFieldEmail;
+    public TextField textFieldAddress;
+    public TextField textFieldUsername;
+
+    public TextField textFieldId;
+    public PasswordField textFieldPassword;
 
     @FXML
-    protected void onRegisterClick() {
+    protected void btnUpdateClick() {
+        Optional<String> result = Helper.showUpdateDialog("Update Record", "Enter ID to Update", "Please enter the ID:");
 
+        AtomicReference<Optional<String>> newName = new AtomicReference<>(Optional.empty());
+        AtomicReference<Optional<String>> newEmail = new AtomicReference<>(Optional.empty());
+        AtomicReference<Optional<String>> newAddress = new AtomicReference<>(Optional.empty());
+
+        result.ifPresent(id -> {
+            if (!id.isEmpty()) {
+                newName.set(Helper.showInputDialog("Update Name", "Enter New Name", "Enter the new name:"));
+                newEmail.set(Helper.showInputDialog("Update Email", "Enter New Email", "Enter the new email:"));
+                newAddress.set(Helper.showInputDialog("Update Address", "Enter New Address", "Enter the new address:"));
+
+                newName.get().ifPresent(name -> {
+                    newEmail.get().ifPresent(email -> {
+                        newAddress.get().ifPresent(address -> {
+                            RUD.update(id, name, email, address);
+                        });
+                    });
+                });
+            } else {
+                Helper.showAlert(Alert.AlertType.WARNING, "Updating Failed", "ID is Empty", "Please enter a valid ID.");
+            }
+        });
+    }
+
+
+    @FXML
+    protected void btnReadClick() {
+        Optional<String> result = Helper.showInputDialog("Read Record", "Enter ID to Read", "Please enter the ID:");
+
+        result.ifPresent(id -> {
+            if (!id.isEmpty()) {
+                RUD.read(id);
+            } else {
+                Helper.showAlert(Alert.AlertType.WARNING, "Reading Failed", "ID is Empty", "Please enter a valid ID.");
+            }
+        });
+    }
+
+    @FXML
+    protected void btnDeleteClick() {
+        Optional<String> result = Helper.showInputDialog("Delete Record", "Enter ID to Delete", "Please enter the ID:");
+
+        result.ifPresent(id -> {
+            if (!id.isEmpty()) {
+                if(RUD.delete(id))
+                    Helper.showAlert(Alert.AlertType.INFORMATION, "Delete Successful", "Record Deleted", "Record with ID " + id + " has been deleted.");
+            } else {
+                Helper.showAlert(Alert.AlertType.WARNING, "Delete Failed", "ID is Empty", "Please enter a valid ID.");
+            }
+        });
+    }
+
+    @FXML
+    protected void btnRegisterClick() {
+        if(textFieldEmail.getLength() == 0){
+            System.out.println("Please Enter Details");
+            return;
+        }
+        boolean success = false;
         try (Connection c = MySQLConnection.getConnection();
              PreparedStatement statement = c.prepareStatement(
-                     "INSERT INTO tblusers (uname, password) VALUES (?, ?)"
+                     "INSERT INTO accounts (name, email, address) VALUES (?, ?, ?)"
              )) {
-            String username = tfUsername.getText();
-            String userpassword = pfUserPass.getText();
-            boolean usernameAlreadyExists = false;
-
-            String query = "SELECT * FROM tblusers";
-            ResultSet res = statement.executeQuery(query);
-
-            while(res.next()) {
-                int id = res.getInt("id");
-                String name = res.getString("uname");
-
-                if(name.equals(username)) {
-                    usernameAlreadyExists = true;
-                    break;
-                }
+            String name = textFieldName.getText();
+            String email = textFieldEmail.getText();
+            String address = textFieldAddress.getText();
+            statement.setString(1, name);
+            statement.setString(2, email);
+            statement.setString(3, address);
+            int rows = statement.executeUpdate();
+            if (rows != 0) {
+                success = true;
             }
-
-            if(usernameAlreadyExists) {
-                lblFeedback.setText("Username already exists!");
-                lblFeedback.setTextFill(Color.RED);
-            } else {
-                statement.setString(1, username);
-                statement.setString(2, userpassword);
-
-                statement.executeUpdate();
-                lblFeedback.setText("Registered successfully!");
-                lblFeedback.setTextFill(Color.BLUE);
-            }
-
-            tfUsername.setText("");
-            pfUserPass.setText("");
+            System.out.println("Rows Inserted: " + rows);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        if (success) {
+            String username = textFieldUsername.getText();
+            String password = textFieldPassword.getText();
+            String hashPass = String.valueOf(password.hashCode());
+            RUD.insert(username, hashPass);
         }
     }
-    @FXML
-    protected void onToLogInClick() throws IOException{
-        Parent login = FXMLLoader.load(Objects.requireNonNull(HelloApplication.class.getResource("login-view.fxml")));
-        AnchorPane p = (AnchorPane) pnRegister.getParent();
-        p.getChildren().remove(pnRegister);
-        p.getChildren().add(login);
-    }
 
-    public void onShowPassword(MouseEvent mouseEvent) {
-        tfTmpPass.setText(pfUserPass.getText());
-        tfTmpPass.setVisible(true);
-        pfUserPass.setVisible(false);
-    }
-
-    public void onUnshowPassword(MouseEvent mouseEvent) {
-        pfUserPass.setVisible(true);
-        pfUserPass.setText(tfTmpPass.getText());
-        tfTmpPass.setVisible(false);
-    }
 }
