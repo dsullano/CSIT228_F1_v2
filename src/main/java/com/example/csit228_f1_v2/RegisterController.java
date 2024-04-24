@@ -20,7 +20,7 @@ public class RegisterController {
 
     @FXML
     protected void btnUpdateClick() {
-        Optional<String> result = Helper.showUpdateDialog("Update Record", "Enter ID to Update", "Please enter the ID:");
+        Optional<String> result = Helper.updateMessage("Update Record", "Enter ID to Update", "Please enter the ID:");
 
         AtomicReference<Optional<String>> newName = new AtomicReference<>(Optional.empty());
         AtomicReference<Optional<String>> newEmail = new AtomicReference<>(Optional.empty());
@@ -28,9 +28,9 @@ public class RegisterController {
 
         result.ifPresent(id -> {
             if (!id.isEmpty()) {
-                newName.set(Helper.showInputDialog("Update Name", "Enter New Name", "Enter the new name:"));
-                newEmail.set(Helper.showInputDialog("Update Email", "Enter New Email", "Enter the new email:"));
-                newAddress.set(Helper.showInputDialog("Update Address", "Enter New Address", "Enter the new address:"));
+                newName.set(Helper.inputMessage("Update Name", "Enter New Name", "Enter the new name:"));
+                newEmail.set(Helper.inputMessage("Update Email", "Enter New Email", "Enter the new email:"));
+                newAddress.set(Helper.inputMessage("Update Address", "Enter New Address", "Enter the new address:"));
 
                 newName.get().ifPresent(name -> {
                     newEmail.get().ifPresent(email -> {
@@ -40,7 +40,7 @@ public class RegisterController {
                     });
                 });
             } else {
-                Helper.showAlert(Alert.AlertType.WARNING, "Updating Failed", "ID is Empty", "Please enter a valid ID.");
+                Helper.alert(Alert.AlertType.WARNING, "Updating Failed", "ID is Empty", "Please enter a valid ID.");
             }
         });
     }
@@ -48,27 +48,27 @@ public class RegisterController {
 
     @FXML
     protected void btnReadClick() {
-        Optional<String> result = Helper.showInputDialog("Read Record", "Enter ID to Read", "Please enter the ID:");
+        Optional<String> result = Helper.inputMessage("Read Record", "Enter ID to Read", "Please enter the ID:");
 
         result.ifPresent(id -> {
             if (!id.isEmpty()) {
                 RUD.read(id);
             } else {
-                Helper.showAlert(Alert.AlertType.WARNING, "Reading Failed", "ID is Empty", "Please enter a valid ID.");
+                Helper.alert(Alert.AlertType.WARNING, "Reading Failed", "ID is Empty", "Please enter a valid ID.");
             }
         });
     }
 
     @FXML
     protected void btnDeleteClick() {
-        Optional<String> result = Helper.showInputDialog("Delete Record", "Enter ID to Delete", "Please enter the ID:");
+        Optional<String> result = Helper.inputMessage("Delete Record", "Enter ID to Delete", "Please enter the ID:");
 
         result.ifPresent(id -> {
             if (!id.isEmpty()) {
                 if(RUD.delete(id))
-                    Helper.showAlert(Alert.AlertType.INFORMATION, "Delete Successful", "Record Deleted", "Record with ID " + id + " has been deleted.");
+                    Helper.alert(Alert.AlertType.INFORMATION, "Delete Successful", "Record Deleted", "Record with ID " + id + " has been deleted.");
             } else {
-                Helper.showAlert(Alert.AlertType.WARNING, "Delete Failed", "ID is Empty", "Please enter a valid ID.");
+                Helper.alert(Alert.AlertType.WARNING, "Delete Failed", "ID is Empty", "Please enter a valid ID.");
             }
         });
     }

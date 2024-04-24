@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public class Helper {
 
-    public static Optional<String> showInputDialog(String title, String headerText, String contentText) {
+    public static Optional<String> inputMessage(String title, String headerText, String contentText) {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle(title);
         dialog.setHeaderText(headerText);
@@ -15,7 +15,7 @@ public class Helper {
         return dialog.showAndWait();
     }
 
-    public static void showAlert(Alert.AlertType type, String title, String headerText, String contentText) {
+    public static void alert(Alert.AlertType type, String title, String headerText, String contentText) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setHeaderText(headerText);
@@ -23,7 +23,7 @@ public class Helper {
         alert.showAndWait();
     }
 
-    public static Optional<String> showUpdateDialog(String title ,String headerText, String contentText) {
+    public static Optional<String> updateMessage(String title , String headerText, String contentText) {
 
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle(title);

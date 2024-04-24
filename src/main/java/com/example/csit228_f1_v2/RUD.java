@@ -32,12 +32,12 @@ public class RUD {
             int rows = statement.executeUpdate();
 
             if (rows > 0) {
-                Helper.showAlert(Alert.AlertType.INFORMATION, "Update Successful", "Record Updated", "Record with ID " + id + " has been updated.");
+                Helper.alert(Alert.AlertType.INFORMATION, "Update Successful", "Record Updated", "Record with ID " + id + " has been updated.");
             } else {
-                Helper.showAlert(Alert.AlertType.WARNING, "Update Failed", "No Record Updated", "No record found with ID " + id);
+                Helper.alert(Alert.AlertType.WARNING, "Update Failed", "No Record Updated", "No record found with ID " + id);
             }
         } catch (SQLException e) {
-            Helper.showAlert(Alert.AlertType.ERROR, "Error", "Update Error", "An error occurred while updating record: " + e.getMessage());
+            Helper.alert(Alert.AlertType.ERROR, "Error", "Update Error", "An error occurred while updating record: " + e.getMessage());
         }
     }
 
@@ -67,10 +67,10 @@ public class RUD {
             statement.setInt(1, Integer.parseInt(text));
             int rows = statement.executeUpdate();
             if (rows == 0) {
-                Helper.showAlert(Alert.AlertType.WARNING, "Delete Failed", "No Record Deleted", "No record found with ID " + text);
+                Helper.alert(Alert.AlertType.WARNING, "Delete Failed", "No Record Deleted", "No record found with ID " + text);
                 return false;
             } else {
-                Helper.showAlert(Alert.AlertType.INFORMATION, "Delete Successful", "Record Deleted", "Record with ID " + text + " has been deleted.");
+                Helper.alert(Alert.AlertType.INFORMATION, "Delete Successful", "Record Deleted", "Record with ID " + text + " has been deleted.");
                 return true;
             }
         }catch(SQLException e){
@@ -89,13 +89,12 @@ public class RUD {
                 String email = resultSet.getString("email");
                 String address = resultSet.getString("address");
 
-                // Show the details in a pop-up dialog
                 showDetailsDialog(name, email, address);
             } else {
-                Helper.showAlert(Alert.AlertType.WARNING, "Search Failed", "No Record Found", "No record found with ID " + id);
+                Helper.alert(Alert.AlertType.WARNING, "Search Failed", "No Record Found", "No record found with ID " + id);
             }
         } catch (SQLException e) {
-            Helper.showAlert(Alert.AlertType.ERROR, "Error", "Search Error", "An error occurred while searching record: " + e.getMessage());
+            Helper.alert(Alert.AlertType.ERROR, "Error", "Search Error", "An error occurred while searching record: " + e.getMessage());
         }
     }
 

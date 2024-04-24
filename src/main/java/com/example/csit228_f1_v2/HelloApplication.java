@@ -126,7 +126,7 @@ public class HelloApplication extends Application {
                         stage.setScene(s);
                         stage.show();
                     } else {
-                        Helper.showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid Username or Password", "Please enter valid credentials.");
+                        Helper.alert(Alert.AlertType.ERROR, "Login Failed", "Invalid Username or Password", "Please enter valid credentials.");
                     }
                 } catch (SQLException | IOException e) {
                     e.printStackTrace();
